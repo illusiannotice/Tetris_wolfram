@@ -1,7 +1,7 @@
 
 
 class Object:
-    def __init__(self, pos, speed):
+    def __init__(self, pos: list, speed: int):
 		self.pos = pos
 		self.speed = speed
 
