@@ -1,9 +1,10 @@
 
 
 class Object:
-    def __init__(self, pos: list, speed: int):
-		self.pos = pos
+    def __init__(self, pos: tuple, speed: int, falling: bool):
+		self.posx, self.posy = pos
 		self.speed = speed
+		self.falling = falling
 
 class Square(Object):
     def __init__(self, speed, k):
