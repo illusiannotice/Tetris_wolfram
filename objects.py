@@ -18,7 +18,7 @@ class Tshape(Object):
 					 [1,1,1]]
 		self.k = k
 
-class Lshape(object):
+class Lshape(Object):
 	def __init__(self, k):
 		self.form = [[1,0],
 					 [1,0],
