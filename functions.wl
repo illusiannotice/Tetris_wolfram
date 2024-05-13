@@ -13,7 +13,7 @@ Begin["`Private`"];
 randomPos[lim_] := RandomInteger[{1,lim}]; 
 
 
-changePosY[y_]:= y - 1
+changePosY[y_]:= y + 1
 
 
 End[];
