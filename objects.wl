@@ -37,10 +37,10 @@ self@setPosX[val_] := (posX = val);
 self@setPosY[val_]:=(posY = val);
 self@setSpeed[val_]:=(speed = val);
 (*---object methods---*)
-self@placeOnDisplay[display_]:= (For[i = posY, i <= posY + Length[shape] - 1, i++, 
-								 For[j = posX, j <= posX + Length[shape[[i]]] - 1, j++,
-								  Print[j];
-								  display[[i,j]] = shape[[i, j -(posX - 1)]];
+self@placeOnDisplay[display_]:= (For[i = posY, i < posY + Length[shape], i++, 
+								 For[j = posX, j < posX + Length[shape[[i - (posY - 1)]]], j++,
+								  display[[i,j]] = shape[[i-(posY - 1), j -(posX - 1)]];
+								  If[i > 2, display[[i - 2,j]] = 0];
 								  ]];
 								 Return[display]);
 
