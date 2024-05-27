@@ -3,7 +3,7 @@
 BeginPackage["Objects`"];
 
 
-squareShape::usage = "squareObject[$pos, $k, $speed]";
+figureBuild::usage = "....";
 getShape::usage = "....";
 getPosX::usage = "....";
 getPosY::usage = "....";
@@ -20,15 +20,14 @@ isFalling::usage = "....";
 Begin["`Private`"];
 
 
-squareShape[$pos_, $k_, $speed_, $fallIndex_]:= Module[
+figureBuild[$pos_, $k_, $speed_, $fallIndex_, $shape_]:= Module[
 {posX, posY, k, speed, shape, self,i,j, fallIndex},
 (*---constructor code---*)
 posX = $pos[[2]];
 posY = $pos[[1]];
 k = $k;
 speed = $speed;
-shape = {{1, 1},
-		 {1, 1}};
+shape = $shape;
 fallIndex = $fallIndex;
 		 
 SetAttributes[self, HoldAll];
@@ -47,10 +46,10 @@ self@setFallIndex[val_]:=(fallIndex = val);
 self@placeOnDisplay[display_]:= (For[i = posY, i < posY + Length[shape], i++, 
 								 For[j = posX, j < posX + Length[shape[[i - (posY - 1)]]], j++,
 								  display[[i,j]] = shape[[i-(posY - 1), j -(posX - 1)]];
-								  If[i > 2, display[[i - 2,j]] = 0];
+								  If[i > Length[shape], display[[i - Length[shape],j]] = 0];
 								  ]];
 								 Return[display]);
-self@isFalling[display_]:= If[display[[posY + 1, posX]] != 1, Return[True], Return[False]];								
+self@isFalling[display_]:= If[display[[posY + Length[shape]- 1, posX]] != 1, Return[True], Return[False]];								
 
 self
 ];
