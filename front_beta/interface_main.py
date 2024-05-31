@@ -8,16 +8,26 @@ class Display(ft.Container):
         self.height = len(matrix)
         self.width = len(matrix[0])
         self.cols = [ft.Container(width=30, height=30, bgcolor=ft.colors.BLACK, margin=0, padding=0)] * self.width
+        self.displayMatrix = [ft.Row(controls=self.cols, spacing=0)] * self.height
         self.display = ft.Container(
             content=ft.Column(
-                controls=[ft.Row(
-                    controls=self.cols,
-                    spacing=0)] * self.height,
+                controls=self.displayMatrix,
                 spacing=0),
             bgcolor=ft.colors.BLACK,
             width=300,
 
         )
+
+    def setmatrix(self, matrix):
+        self.matrix = matrix
+
+    def updatedisplay(self):
+        for i in range(self.height):
+            for j in range(self.width):
+                if self.matrix[i][j] == 0:
+                    self.displayMatrix[i].controls[j].bgcolor = ft.colors.BLACK
+                else:
+                    self.displayMatrix[i].controls[j].bgcolor = ft.colors.WHITE
 
 
 def main(page: ft.Page) -> None:
