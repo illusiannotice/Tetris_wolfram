@@ -43,13 +43,17 @@ self@setPosY[val_]:=(posY = val);
 self@setSpeed[val_]:=(speed = val);
 self@setFallIndex[val_]:=(fallIndex = val);
 (*---object methods---*)
-self@placeOnDisplay[display_]:= (For[i = posY, i < posY + Length[shape], i++, 
+self@placeOnDisplay[display_, mov_]:= (For[i = posY, i < posY + Length[shape], i++, 
 								 For[j = posX, j < posX + Length[shape[[i - (posY - 1)]]], j++,
 								  display[[i,j]] = shape[[i-(posY - 1), j -(posX - 1)]];
 								  If[i > Length[shape], display[[i - Length[shape],j]] = 0];
+								  If[mov,
+								   display[[i, posX - 1]] = 0;
+								   If[posX + Length[shape[[i - (posY - 1)]]] <= Length[display[[1]]], display[[i, posX + Length[shape[[i - (posY - 1)]]]]] = 0];
+								  ]
 								  ]];
 								 Return[display]);
-self@isFalling[display_]:= If[display[[posY + Length[shape]- 1, posX]] != 1, Return[True], Return[False]];								
+self@isFalling[display_]:= (For[i = 0, i < Length[shape[[1]]], i++, If[display[[posY + Length[shape], posX + i]] == 1, Return[False]]]; Return[True]);								
 
 self
 ];

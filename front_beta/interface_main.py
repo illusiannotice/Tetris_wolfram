@@ -15,6 +15,8 @@ class Display(ft.Container):
                 spacing=0),
             bgcolor=ft.colors.BLACK,
             width=300,
+            padding=0,
+            margin=0
 
         )
 
@@ -26,6 +28,7 @@ class Display(ft.Container):
             for j in range(self.width):
                 if self.matrix[i][j] == 0:
                     self.displayMatrix[i].controls[j].bgcolor = ft.colors.BLACK
+
                 else:
                     self.displayMatrix[i].controls[j].bgcolor = ft.colors.WHITE
 
@@ -37,25 +40,21 @@ def main(page: ft.Page) -> None:
     }
     page.theme_mode = ft.ThemeMode.DARK
     page.theme = ft.Theme(font_family="OpenSans")
-    page.window_width = 300
-    page.window_width = 600
+    page.window_width = 350
+    page.window_height = 725
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.appbar = ft.AppBar(bgcolor=ft.colors.GREEN_900, title=ft.Text("Tetris", size=30))
-
-    display = ft.Container(
-        content=ft.Column(
-            controls=[ft.Row(
-                controls=[ft.Container(width=30, height=30, bgcolor=ft.colors.BLACK, margin=0, padding=0)] * 10,
-                spacing=0)] * 20,
-            spacing=0),
-        bgcolor=ft.colors.BLACK,
-        width=300,
-
-    )
-    score_display = ft.Container
+    matrix = [[0]*10]*20
+    display = Display(matrix)
+    matrix[1][2] = 1
+    page.add(display.display)
+    page.update()
+    display.setmatrix(matrix)
+    display.updatedisplay()
     page.add(display)
     page.update()
+
 
 
 if __name__ == "__main__":
