@@ -48,7 +48,7 @@ self@placeOnDisplay[display_, mov_]:= (For[i = posY, i < posY + Length[shape], i
 								  display[[i,j]] = shape[[i-(posY - 1), j -(posX - 1)]];
 								  If[i > Length[shape], display[[i - Length[shape],j]] = 0];
 								  If[mov,
-								   display[[i, posX - 1]] = 0;
+								   If[posX > 1, display[[i, posX - 1]] = 0];
 								   If[posX + Length[shape[[i - (posY - 1)]]] <= Length[display[[1]]], display[[i, posX + Length[shape[[i - (posY - 1)]]]]] = 0];
 								  ]
 								  ]];
