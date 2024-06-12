@@ -12,6 +12,7 @@ getSpeed::usage = "....";
 setPosX::usage = "....";
 setPosY::usage = "....";
 setSpeed::usage = "....";
+setShape::usage = "....";
 setFallIndex::usage = "....";
 placeOnDisplay::usage = "....";
 isFalling::usage = "....";
@@ -42,6 +43,7 @@ self@setPosX[val_] := (posX = val);
 self@setPosY[val_]:=(posY = val);
 self@setSpeed[val_]:=(speed = val);
 self@setFallIndex[val_]:=(fallIndex = val);
+self@setShape[val_]:=(shape = val);
 (*---object methods---*)
 self@placeOnDisplay[display_, mov_]:= (For[i = posY, i < posY + Length[shape], i++, 
 								 For[j = posX, j < posX + Length[shape[[i - (posY - 1)]]], j++,
