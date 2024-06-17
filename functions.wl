@@ -9,6 +9,7 @@ changeToLeft::usage = "Moves figure to left";
 randomPos::usage = "Generates random pos for object.";
 randomChoice::usage = "Selects one random figure";
 clearDisplay::usage = "Clears display";
+rotateFigure::usage = "Rotates falling figure.";
 
 
 Begin["`Private`"];
@@ -30,6 +31,12 @@ changeToLeft[x_]:= x - 1;
 
 
 clearDisplay[]:= Return[RandomInteger[0,{23,10}]]
+
+
+rotateFigure[figure_,angle_]:= Block[{tmpImg}, 
+ tmpImg = Image[figure];
+ tmpImg = ImageRotate[tmpImg, angle Degree];
+ Return[ImageData[tmpImg,"Bit"]]]
 
 
 End[];

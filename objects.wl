@@ -22,7 +22,7 @@ Begin["`Private`"];
 
 
 figureBuild[$pos_, $k_, $speed_, $fallIndex_, $shape_]:= Module[
-{posX, posY, k, speed, shape, self,i,j, fallIndex},
+{posX, posY, k, speed, shape, self,i,j, fallIndex, counter},
 (*---constructor code---*)
 posX = $pos[[2]];
 posY = $pos[[1]];
@@ -45,9 +45,9 @@ self@setSpeed[val_]:=(speed = val);
 self@setFallIndex[val_]:=(fallIndex = val);
 self@setShape[val_]:=(shape = val);
 (*---object methods---*)
-self@placeOnDisplay[display_, mov_]:= (For[i = posY, i < posY + Length[shape], i++, 
+self@placeOnDisplay[display_, mov_]:= (If[mov, display = RandomInteger[0,{23,10}]];For[i = posY, i < posY + Length[shape], i++, 
 								 For[j = posX, j < posX + Length[shape[[i - (posY - 1)]]], j++,
-								  display[[i,j]] = shape[[i-(posY - 1), j -(posX - 1)]];
+								  If[shape[[i-(posY - 1), j -(posX - 1)]] != 0, display[[i,j]] = shape[[i-(posY - 1), j -(posX - 1)]]];
 								  If[i > Length[shape], display[[i - Length[shape],j]] = 0];
 								  If[mov,
 								   If[posX > 1, display[[i, posX - 1]] = 0];
@@ -55,7 +55,7 @@ self@placeOnDisplay[display_, mov_]:= (For[i = posY, i < posY + Length[shape], i
 								  ]
 								  ]];
 								 Return[display]);
-self@isFalling[display_]:= (For[i = 0, i < Length[shape[[1]]], i++, If[display[[posY + Length[shape], posX + i]] == 1, Return[False]]]; Return[True]);								
+self@isFalling[display_]:= (For[i = 0, i < Length[shape[[1]]], i++, counter = 0; For[j = 0, j <= Length[shape], j++, If[display[[posY + j, posX + i, 1]] == 0, counter = counter + 1]];If[counter == 0, Return[False]]];Return[True]);								
 
 self
 ];
