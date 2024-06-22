@@ -22,7 +22,7 @@ Begin["`Private`"];
 
 
 figureBuild[$pos_, $k_, $speed_, $fallIndex_, $shape_]:= Module[
-{posX, posY, k, speed, shape, self,i,j, fallIndex, counter},
+{posX, posY, k, speed, shape, self,i,j, fallIndex, counter, whiteIsFound, whitePoint},
 (*---constructor code---*)
 posX = $pos[[2]];
 posY = $pos[[1]];
@@ -55,7 +55,7 @@ self@placeOnDisplay[display_, mov_]:= (If[mov, display = RandomInteger[0,{23,10}
 								  ]
 								  ]];
 								 Return[display]);
-self@isFalling[display_]:= (For[i = 0, i < Length[shape[[1]]], i++, counter = 0; For[j = 0, j <= Length[shape], j++, If[display[[posY + j, posX + i, 1]] == 0, counter = counter + 1]];If[counter == 0, Return[False]]];Return[True]);								
+self@isFalling[display_]:= (For[i = 0, i < Length[shape[[1]]], i++, counter = 0; whitePoint = 0; For[j = whitePoint, j <= Length[shape], j++, If[display[[posY + whitePoint, posX + i, 1]] == 1, If[display[[posY + j, posX + i, 1]] == 0, counter = counter + 1], whitePoint = whitePoint + 1]];If[counter == 0, Return[False]]];Return[True]);								
 
 self
 ];

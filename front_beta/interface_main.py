@@ -9,23 +9,22 @@ class Display(ft.Container):
         self.width = len(matrix[0])
         self.cols = [ft.Container(width=30, height=30, bgcolor=ft.colors.BLACK, margin=0, padding=0)] * self.width
         self.displayMatrix = [ft.Row(controls=self.cols, spacing=0)] * self.height
-        self.display = ft.Container(
-            content=ft.Column(
-                controls=self.displayMatrix,
-                spacing=0),
-            bgcolor=ft.colors.BLACK,
-            width=300,
-            padding=0,
-            margin=0
+        self.content = ft.Column(controls=self.displayMatrix, spacing=0)
+        self.bgcolor = ft.colors.BLACK
+        self.width = 300
+        self.padding = 0
+        self.margin = 0
 
-        )
+
 
     def setmatrix(self, matrix):
         self.matrix = matrix
 
     def updatedisplay(self):
-        for i in range(self.height):
-            for j in range(self.width):
+        for i in range(self.height - 1):
+            print(i)
+            for j in range(self.width - 1):
+                print(j)
                 if self.matrix[i][j] == 0:
                     self.displayMatrix[i].controls[j].bgcolor = ft.colors.BLACK
 
@@ -45,10 +44,11 @@ def main(page: ft.Page) -> None:
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.appbar = ft.AppBar(bgcolor=ft.colors.GREEN_900, title=ft.Text("Tetris", size=30))
-    matrix = [[0]*10]*20
+    matrix = [[0] * 10] * 20
+    print(matrix)
     display = Display(matrix)
     matrix[1][2] = 1
-    page.add(display.display)
+    page.add(display)
     page.update()
     display.setmatrix(matrix)
     display.updatedisplay()
